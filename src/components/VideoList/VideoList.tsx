@@ -147,6 +147,16 @@ export interface VideoListProps {
     peer: HMSPeer,
     track?: HMSTrack,
   ) => AdditionalVideoTileProps;
+
+  /**
+   * The color of the audio display
+   */
+  audioLevelDisplayColor?: string;
+
+  /**
+   * Boolean variable to specify if default overlay and controls should be shown
+   */
+   showDefaultOverlayOptions?: boolean;
 }
 
 const defaultClasses: VideoListClasses = {
@@ -181,6 +191,8 @@ export const VideoList = ({
   compact = false,
   showTileForAllPeers = false,
   videoTileProps,
+  audioLevelDisplayColor,
+  showDefaultOverlayOptions = true,
 }: VideoListProps) => {
   const { tw, appBuilder, tailwindConfig } = useHMSTheme();
   const styler = useMemo(
@@ -326,6 +338,8 @@ export const VideoList = ({
                           }
                           avatarType={avatarType}
                           compact={compact}
+                          audioLevelDisplayColor={audioLevelDisplayColor}
+                          showDefaultOverlayOptions={showDefaultOverlayOptions}
                           {...additionalProps}
                         />
                       </div>

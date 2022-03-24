@@ -63,8 +63,6 @@ export interface VideoTileProps
    */
   showScreen?: boolean;
 
-  showDefaultOverlayOptions?: boolean;
-
   /**
    * Indicates if the stream's audio is muted or not. Ignored if showAudioMuteStatus is false.
    */
@@ -117,6 +115,11 @@ export interface VideoTileProps
    * Boolean variable to specify if stats overlay should be shown
    */
   showStats?: boolean;
+
+  /**
+   * Boolean variable to specify if default overlay and controls should be shown
+   */
+  showDefaultOverlayOptions?: boolean;
 }
 
 export interface VideoTileClasses extends VideoClasses {
@@ -189,6 +192,7 @@ const Tile = ({
   showStats = false,
   compact,
   children,
+  showDefaultOverlayOptions = true,
 }: VideoTileProps) => {
   const { appBuilder, tw, tailwindConfig, toast } = useHMSTheme();
   const hmsActions = useHMSActions();
@@ -434,12 +438,6 @@ const Tile = ({
   };
 
   return (
-    <div className='bg-green-300 w-full h-full'>
-      hello
-    </div>
-  )
-
-  return (
     <ClickAwayListener onClickAway={() => setShowTrigger(false)}>
       <div
         className={styler('root')}
@@ -449,7 +447,7 @@ const Tile = ({
         }}
         ref={rootRef}
       >
-        {!peer.isLocal && (showMenu || showTrigger) && (
+        {!peer.isLocal && (showMenu || showTrigger) && showDefaultOverlayOptions && (
           <ContextMenu
             menuOpen={showMenu}
             onTrigger={value => setShowMenu(value)}
@@ -475,14 +473,14 @@ const Tile = ({
                 : { objectFit: 'contain', width: '100%', height: '100%' }
             }
           >
-            {isHandRaised && !showScreen && (
+            {isHandRaised && !showScreen && showDefaultOverlayOptions && (
               <HandFilledIcon
                 className={`${styler('raiseHand')}`}
                 width="40"
                 height="40"
               />
             )}
-            {showStats && (
+            {showStats && showDefaultOverlayOptions && (
               <VideoTileStats
                 audioTrackID={storeHmsAudioTrack?.id}
                 videoTrackID={hmsVideoTrack?.id || storeHmsVideoTrack?.id}
@@ -499,10 +497,10 @@ const Tile = ({
               isLocal={peer.isLocal}
               displayShape={displayShape}
             />
-            {showAudioLevel && audioLevelDisplayType === 'border' && (
+            {showAudioLevel && (audioLevelDisplayType === 'border' || audioLevelDisplayType === 'static-border') && (
               <AudioLevelIndicator
                 audioTrackId={tileAudioTrack}
-                type={'border'}
+                type={audioLevelDisplayType}
                 level={audioLevel}
                 displayShape={displayShape}
                 classes={{
@@ -512,6 +510,11 @@ const Tile = ({
                 color={audioLevelDisplayColor}
               />
             )}
+            {/* {
+              showAudioLevel === false && customAudioLevelIndicator is not null or undeinf (
+                {customAudioLevelIndicator}
+              )
+            } */}
             {isVideoMuted && (
               <div
                 className={`${styler('avatarContainer')} ${
@@ -520,14 +523,14 @@ const Tile = ({
                     : ''
                 }`}
               >
-                {isHandRaised && !showScreen && (
+                {isHandRaised && !showScreen && showDefaultOverlayOptions && (
                   <HandFilledIcon
                     className={`${styler('raiseHand')}`}
                     width="40"
                     height="40"
                   />
                 )}
-                {showStats && (
+                {showStats && showDefaultOverlayOptions && (
                   <VideoTileStats
                     audioTrackID={storeHmsAudioTrack?.id}
                     videoTrackID={hmsVideoTrack?.id || storeHmsVideoTrack?.id}
@@ -549,7 +552,7 @@ const Tile = ({
                 showGradient={displayShape === 'circle'}
               />
             )}
-            {showScreen && showTrigger && (
+            {showScreen && showTrigger && showDefaultOverlayOptions && (
               <div className={styler('fullScreenControl')}>
                 <Button
                   key="fullscreen"

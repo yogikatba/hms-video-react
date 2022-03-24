@@ -36,8 +36,8 @@
     "trailingComma": "all",
     "arrowParens": "avoid"
   },
-  "name": "@100mslive/hms-video-react",
-  "author": "100ms",
+  "name": "hms-video-react",
+  "author": "Yogi",
   "module": "dist/hms-video-react.esm.js",
   "size-limit": [
     {
