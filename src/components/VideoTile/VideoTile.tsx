@@ -550,7 +550,7 @@ const Tile = ({
             )}
             {controlsComponent ? (
               controlsComponent
-            ) : !showDefaultOverlayOptions && (
+            ) : showDefaultOverlayOptions && (
               // TODO circle controls are broken now
               <VideoTileControls
                 isLocal={peer.isLocal}

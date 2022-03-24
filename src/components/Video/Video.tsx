@@ -87,7 +87,7 @@ export interface VideoProps {
   displayShape?: DisplayShapes;
   /**
    * Indicates how to display the volume of the stream's audio.
-   * Supported types are 'border', 'inline-wave' and 'inline-circle'.
+   * Supported types are 'border', 'inline-wave', 'inline-circle' and 'static-border'.
    * Ignored if showAudioLevel is set to false.
    */
   audioLevelDisplayType?: AudioLevelDisplayType;
