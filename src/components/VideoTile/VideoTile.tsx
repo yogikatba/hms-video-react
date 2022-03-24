@@ -63,6 +63,8 @@ export interface VideoTileProps
    */
   showScreen?: boolean;
 
+  showDefaultOverlayOptions?: boolean;
+
   /**
    * Indicates if the stream's audio is muted or not. Ignored if showAudioMuteStatus is false.
    */
@@ -430,6 +432,12 @@ const Tile = ({
       setIsFullScreen(fs);
     }
   };
+
+  return (
+    <div className='bg-green-300 w-full h-full'>
+      hello
+    </div>
+  )
 
   return (
     <ClickAwayListener onClickAway={() => setShowTrigger(false)}>
