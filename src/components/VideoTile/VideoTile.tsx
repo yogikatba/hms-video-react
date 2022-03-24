@@ -120,6 +120,12 @@ export interface VideoTileProps
    * Boolean variable to specify if default overlay and controls should be shown
    */
   showDefaultOverlayOptions?: boolean;
+
+  /**
+   * Border width for audio level indicator
+   * Only applied if `audioLevelDisplayType === 'static-border'`
+   */
+  audioLevelBorderWidth?: number;
 }
 
 export interface VideoTileClasses extends VideoClasses {
@@ -193,6 +199,7 @@ const Tile = ({
   compact,
   children,
   showDefaultOverlayOptions = true,
+  audioLevelBorderWidth
 }: VideoTileProps) => {
   const { appBuilder, tw, tailwindConfig, toast } = useHMSTheme();
   const hmsActions = useHMSActions();
@@ -508,6 +515,7 @@ const Tile = ({
                   root: styler('borderAudioRoot'),
                 }}
                 color={audioLevelDisplayColor}
+                borderWidth={audioLevelBorderWidth}
               />
             )}
             {/* {
@@ -542,7 +550,7 @@ const Tile = ({
             )}
             {controlsComponent ? (
               controlsComponent
-            ) : (
+            ) : !showDefaultOverlayOptions && (
               // TODO circle controls are broken now
               <VideoTileControls
                 isLocal={peer.isLocal}
