@@ -157,12 +157,6 @@ export interface VideoListProps {
    * Boolean variable to specify if default overlay and controls should be shown
    */
   showDefaultOverlayOptions?: boolean;
-  
-  /**
-   * Border width for audio level indicator
-   * Only applied if `audioLevelDisplayType === 'static-border'`
-   */
-  audioLevelBorderWidth?: number;
 }
 
 const defaultClasses: VideoListClasses = {
@@ -199,7 +193,6 @@ export const VideoList = ({
   videoTileProps,
   audioLevelDisplayColor,
   showDefaultOverlayOptions = true,
-  audioLevelBorderWidth
 }: VideoListProps) => {
   const { tw, appBuilder, tailwindConfig } = useHMSTheme();
   const styler = useMemo(
@@ -347,7 +340,6 @@ export const VideoList = ({
                           compact={compact}
                           audioLevelDisplayColor={audioLevelDisplayColor}
                           showDefaultOverlayOptions={showDefaultOverlayOptions}
-                          audioLevelBorderWidth={audioLevelBorderWidth}
                           {...additionalProps}
                         />
                       </div>

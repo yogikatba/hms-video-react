@@ -121,11 +121,6 @@ export interface VideoTileProps
    */
   showDefaultOverlayOptions?: boolean;
 
-  /**
-   * Border width for audio level indicator
-   * Only applied if `audioLevelDisplayType === 'static-border'`
-   */
-  audioLevelBorderWidth?: number;
 }
 
 export interface VideoTileClasses extends VideoClasses {
@@ -199,7 +194,6 @@ const Tile = ({
   compact,
   children,
   showDefaultOverlayOptions = true,
-  audioLevelBorderWidth
 }: VideoTileProps) => {
   const { appBuilder, tw, tailwindConfig, toast } = useHMSTheme();
   const hmsActions = useHMSActions();
@@ -504,7 +498,7 @@ const Tile = ({
               isLocal={peer.isLocal}
               displayShape={displayShape}
             />
-            {showAudioLevel && (audioLevelDisplayType === 'border' || audioLevelDisplayType === 'static-border') && (
+            {showAudioLevel && audioLevelDisplayType === 'border' && (
               <AudioLevelIndicator
                 audioTrackId={tileAudioTrack}
                 type={audioLevelDisplayType}
@@ -515,7 +509,6 @@ const Tile = ({
                   root: styler('borderAudioRoot'),
                 }}
                 color={audioLevelDisplayColor}
-                borderWidth={audioLevelBorderWidth}
               />
             )}
             {/* {
