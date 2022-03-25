@@ -501,7 +501,7 @@ const Tile = ({
             {showAudioLevel && audioLevelDisplayType === 'border' && (
               <AudioLevelIndicator
                 audioTrackId={tileAudioTrack}
-                type={audioLevelDisplayType}
+                type={'border'}
                 level={audioLevel}
                 displayShape={displayShape}
                 classes={{
@@ -511,11 +511,6 @@ const Tile = ({
                 color={audioLevelDisplayColor}
               />
             )}
-            {/* {
-              showAudioLevel === false && customAudioLevelIndicator is not null or undeinf (
-                {customAudioLevelIndicator}
-              )
-            } */}
             {isVideoMuted && (
               <div
                 className={`${styler('avatarContainer')} ${
